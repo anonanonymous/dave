@@ -48,6 +48,7 @@ import {
     handlePoll,
     handleMultiPoll,
     handlePrice,
+    handleSpace,
 } from './CommandImplementations';
 
 import {
@@ -234,6 +235,15 @@ export const Commands: Command[] = [
             'addquote',
             'quote',
         ],
+    },
+    {
+        aliases: ['fact', 'space'],
+        primaryCommand: {
+            argsFormat: Args.DontNeed,
+            implementation: handleSpace,
+            description: 'Get a random space fact',
+            needDb: false,
+        },
     },
 ];
 

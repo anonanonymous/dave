@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import translate = require('@vitalets/google-translate-api');
 
 import fetch from 'node-fetch';
+const facts = require('../facts.json');
 
 import { stringify, unescape } from 'querystring';
 import { evaluate } from 'mathjs';
@@ -1359,6 +1360,16 @@ export async function handleAvatar(msg: Message): Promise<void> {
     }
 }
 
+export async function handleSpace(msg: Message): Promise<void> {
+    const item = pickRandomItem(facts) as any;
+
+    if (item.image) {
+        await msg.reply(`${item.fact} ${item.image}`);
+    } else {
+        await msg.reply(item.fact);
+    }
+}
+
 export async function handleNikocado(msg: Message): Promise<void> {
     const nikocados = [
         "ORLINS BACK!",
@@ -1366,6 +1377,8 @@ export async function handleNikocado(msg: Message): Promise<void> {
         "I'm a vegan again!",
         "I sharted the bed!",
     ];
+
+    const fact = pickRandomItem(facts);
 
     await msg.reply(pickRandomItem(nikocados));
 }
